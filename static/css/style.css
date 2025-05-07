@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  font-size: 12px;
+  font-family: 'Times New Roman';
+}
+.ticket {
+  width: 302px;
+  max-width: 302px;
+}
+td,
+th,
+tr,
+table {
+  border-top: solid black;
+  border-collapse: collapse;
+}
+table {
+  margin: 5px;
+}
+td.producto,
+th.producto {
+  overflow-wrap: break-word;
+  width: 120px;
+  max-width: 120px;
+}
+td.cantidad,
+th.cantidad {
+  width: 60px;
+  max-width: 60px;
+  word-break: break-all;
+}
+
+td.precio,
+th.precio {
+  width: 80px;
+  max-width: 80px;
+  word-break: break-all;
+}
+td.sub-total,
+th.sub-total {
+  width: 60px;
+  max-width: 60px;
+  word-break: break-all;
+}
+.centrado {
+  text-align: center;
+  align-content: center;
+}
+
+img {
+  max-width: inherit;
+  width: inherit;
+}
+
+.info {
+  padding: 10px 5px 0px 5px;
+  border-top: solid black;
+  /* border-top-style: dashed; */
+  margin: 5px;
+}
+strong,
+b {
+  font-weight: bold;
+}
+.header {
+  font-size: 15px;
+}
+.title {
+  font-size: 20px;
+}

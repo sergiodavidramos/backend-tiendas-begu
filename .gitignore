@@ -1,0 +1,10 @@
+/node_modules
+/uploads/categoria
+/uploads/oferta
+/uploads/producto
+/uploads/sucursal
+/uploads/user
+/components/backup/files
+.env
+.prettierrc
+./components/backup/files
