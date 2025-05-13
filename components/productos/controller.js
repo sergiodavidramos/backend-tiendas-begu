@@ -185,7 +185,6 @@ function addProduct(product) {
   if (
     !code ||
     !name ||
-    !stock ||
     !precioCompra ||
     !precioVenta ||
     !tipoVenta ||
