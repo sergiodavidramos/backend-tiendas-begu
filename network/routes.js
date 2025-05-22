@@ -17,6 +17,7 @@ const lote = require("../components/lote/network");
 const compras = require("../components/compras/network");
 const movimientoProductos = require("../components/movimientoProductos/network");
 const backup = require("../components/backup/network");
+const valorPuntos = require("../components/puntos/network");
 const router = (server) => {
   server.use("/login", auth);
   server.use("/person", person);
@@ -37,5 +38,6 @@ const router = (server) => {
   server.use("/compras", compras);
   server.use("/movimiento-productos", movimientoProductos);
   server.use("/backup", backup);
+  server.use("/puntos", valorPuntos);
 };
 module.exports = router;
