@@ -10,7 +10,6 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 ObjectId = require("mongodb").ObjectID;
 require("dotenv").config();
-
 function getVentaId(id) {
   return getVentaIdDB(id);
 }
@@ -203,9 +202,10 @@ async function addVenta(body, user, userToken) {
           };
 
           let file = { content: contenidoHtml };
-          html_to_pdf.generatePdf(file, options).then((pdfBuffer) => {
-            return resolve(pdfBuffer);
-          });
+          return resolve({ message: "Venta agregada correctamente" });
+          //   html_to_pdf.generatePdf(file, options).then((pdfBuffer) => {
+          //     return resolve(pdfBuffer);
+          //   });
         })
         .catch((err) => {
           console.log("ERROR", err);
