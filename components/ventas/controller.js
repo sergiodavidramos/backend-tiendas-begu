@@ -20,6 +20,7 @@ function getVentaFecha(fechaInicio, fechaFin) {
   return getVentaFechaDB(fechaInicio, fechaFin);
 }
 
+// Funcion para agregar una venta
 async function addVenta(body, user, userToken) {
   const ubicacionPlantilla = require.resolve("./static/factura.html");
   let contenidoHtml = fs.readFileSync(ubicacionPlantilla, "utf8");
