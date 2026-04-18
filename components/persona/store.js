@@ -7,7 +7,7 @@ function getPersonDB(filterPerson, des, limit) {
             .limit(limit)
             .exec((err, persons) => {
                 if (err) return reject(err);
-                Model.countDocuments({ status: true }, (err, count) => {
+                Model.countDocuments({}, (err, count) => {
                     if (err) return reject(err);
                     resolve({ persons, count });
                 });
