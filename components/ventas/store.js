@@ -28,7 +28,6 @@ function getVentaIdDB(id) {
         });
 }
 function getVentaFechaDB(start, end, idSucursal) {
-    console.log(start, end, idSucursal)
     return Venta.find({
         $and: [
             {
