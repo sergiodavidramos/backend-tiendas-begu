@@ -173,7 +173,8 @@ function getVentasSucursalesDB() {
 
 // Reporte para obtener todos los ingresos de una sucursal con rango de fechas
 function getIngresosDB(idSucursal, fechaInicio, fechaFin) {
-    console.log("Fechas de ingresos ingresados", fechaFin, fechaInicio);
+    console.log("Fechas de ingresos ingresados", fechaInicio, fechaFin);
+    console.log("Fechas de ingresos new date", new Date(fechaInicio), new Date(fechaFin));
     return Detalle.aggregate([
         {
             $unwind: "$detalle",
