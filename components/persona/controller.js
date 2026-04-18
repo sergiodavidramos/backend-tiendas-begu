@@ -34,10 +34,11 @@ function updatePerson(newPerson, id) {
     return Promise.reject({
       message: "Los datos son requeridos para ser actualizados",
     });
-  if (newPerson.puntos) return updatePuntosDB(newPerson, id);
+  if (newPerson.puntos && !newPerson.ci && !newPerson.nombre_comp)
+    return updatePuntosDB(newPerson, id);
   if (newPerson.nombre_comp)
     newPerson.nombre_comp = newPerson.nombre_comp.replace(/\b\w/g, (l) =>
-      l.toUpperCase()
+      l.toUpperCase(),
     );
   return updatePersonDB(newPerson, id);
 }

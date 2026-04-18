@@ -157,5 +157,18 @@ router.get(
       .catch(next);
   }
 );
+// Reporte de capital total del inventario de una sucursal
+router.get(
+  "/reporte/capital-inventario/:idSucursal",
+  passport.authenticate("jwt", { session: false }),
+  scopeValidatorHandler(["GERENTE-ROLE", "ADMIN-ROLE"]),
+  (req, res, next) => {
+    const idSucursal = req.params.idSucursal;
+    controller
+      .getCapitalInventario(idSucursal)
+      .then((capital) => response.success(res, capital))
+      .catch(next);
+  }
+);
 
 module.exports = router;
