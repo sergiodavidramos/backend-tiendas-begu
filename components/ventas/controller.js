@@ -13,10 +13,14 @@ require("dotenv").config();
 function getVentaId(id) {
     return getVentaIdDB(id);
 }
-function getVentaFecha(fechaInicio, fechaFin) {
+function getVentaFecha(fechaInicio, fechaFin, idSucursal) {
     if (!fechaInicio || !fechaFin)
         return Promise.reject({ message: "El rango de fecha es obligatorio" });
-    return getVentaFechaDB(fechaInicio, fechaFin);
+    let idSu = idSucursal;
+    if (!idSu)
+        return Promise.reject({ message: "El id de la sucursal es necesario" });
+    else idSu = ObjectId(idSucursal);
+    return getVentaFechaDB(fechaInicio, fechaFin, idSu);
 }
 
 // Funcion para agregar una venta
