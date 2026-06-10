@@ -120,8 +120,10 @@ function getVentasMesDB(idSucursal, fechaIni, fechaFin) {
                     $eq: idSucursal,
                 },
                 fecha: {
-                    $gte: new Date(`${fechaIni}T00:00:00`),
-                    $lte: new Date(`${fechaFin}T23:59:59.999`),
+                    $gte: new Date(fechaIni),
+                    $lte: new Date(fechaFin),
+                    // $gte: new Date(`${fechaIni}T00:00:00`),
+                    // $lte: new Date(`${fechaFin}T23:59:59.999`),
                 },
                 venta: { $eq: true },
             },
