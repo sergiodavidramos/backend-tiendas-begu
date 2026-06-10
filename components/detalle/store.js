@@ -1,6 +1,4 @@
 const Detalle = require("./model");
-
-const ZONA_HORARIA = "America/La_Paz";
 function addDetalleDB(detalle) {
     const newDetalle = new Detalle(detalle);
     return new Promise((resolve, reject) => {
