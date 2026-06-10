@@ -1,5 +1,7 @@
 const Detalle = require("./model");
+const { DateTime } = require("lunox")
 
+const ZONA_HORARIA = "America/La_Paz";
 function addDetalleDB(detalle) {
     const newDetalle = new Detalle(detalle);
     return new Promise((resolve, reject) => {
@@ -24,6 +26,16 @@ function getDetalleDB(id) {
 
 // Reporte para obtener los productos mas vendidos de una sucursal con el margen de ganancia
 function getProductosVendidosDB(idSucursal, fechaInicio, fechaFin) {
+
+    // 1. Ajustar el inicio al primer milisegundo del día local (00:00:00.000) y convertir a Date de JS
+    const inicioUTC = DateTime.fromISO(fechaInicio, { zone: ZONA_HORARIA })
+        .startOf("day")
+        .toJSDate();
+
+    // 2. Ajustar el fin al último milisegundo del día local (23:59:59.999) y convertir a Date de JS
+    const finUTC = DateTime.fromISO(fechaFin, { zone: ZONA_HORARIA })
+        .endOf("day")
+        .toJSDate();
     return Detalle.aggregate([
         {
             $unwind: "$detalle",
@@ -34,8 +46,8 @@ function getProductosVendidosDB(idSucursal, fechaInicio, fechaFin) {
                     $eq: idSucursal,
                 },
                 fecha: {
-                    $gte: new Date(fechaInicio),
-                    $lte: new Date(fechaFin),
+                    $gte: inicioUTC,
+                    $lte: finUTC,
                 },
 
                 venta: { $eq: true },
@@ -76,6 +88,14 @@ function getProductosVendidosDB(idSucursal, fechaInicio, fechaFin) {
 
 // reportes de ventas y pedidos del dia y el total
 function getVentasDiaDB(idSucursal, fechaHoyInicio, fechaHoyFin) {
+
+    const inicioUTC = DateTime.fromISO(fechaHoyInicio, { zone: ZONA_HORARIA })
+        .startOf("day")
+        .toJSDate();
+
+    const finUTC = DateTime.fromISO(fechaHoyFin, { zone: ZONA_HORARIA })
+        .endOf("day")
+        .toJSDate();
     return Detalle.aggregate([
         {
             $unwind: "$detalle",
@@ -86,8 +106,8 @@ function getVentasDiaDB(idSucursal, fechaHoyInicio, fechaHoyFin) {
                     $eq: idSucursal,
                 },
                 fecha: {
-                    $gte: new Date(fechaHoyInicio),
-                    $lte: new Date(fechaHoyFin),
+                    $gte: inicioUTC,
+                    $lte: finUTC,
                 },
                 venta: { $eq: true },
             },
@@ -107,6 +127,13 @@ function getVentasDiaDB(idSucursal, fechaHoyInicio, fechaHoyFin) {
 
 // reportes de la cantidad de ventas y pedidos del mes y el total
 function getVentasMesDB(idSucursal, fechaIni, fechaFin) {
+    const inicioUTC = DateTime.fromISO(fechaIni, { zone: ZONA_HORARIA })
+        .startOf("day")
+        .toJSDate();
+
+    const finUTC = DateTime.fromISO(fechaFin, { zone: ZONA_HORARIA })
+        .endOf("day")
+        .toJSDate();
     return Detalle.aggregate([
         {
             $unwind: "$detalle",
@@ -117,8 +144,8 @@ function getVentasMesDB(idSucursal, fechaIni, fechaFin) {
                     $eq: idSucursal,
                 },
                 fecha: {
-                    $gte: new Date(fechaIni),
-                    $lte: new Date(fechaFin),
+                    $gte: inicioUTC,
+                    $lte: finUTC,
                 },
                 venta: { $eq: true },
             },
@@ -173,6 +200,13 @@ function getVentasSucursalesDB() {
 
 // Reporte para obtener todos los ingresos de una sucursal con rango de fechas
 function getIngresosDB(idSucursal, fechaInicio, fechaFin) {
+    const inicioUTC = DateTime.fromISO(fechaInicio, { zone: ZONA_HORARIA })
+        .startOf("day")
+        .toJSDate();
+
+    const finUTC = DateTime.fromISO(fechaFin, { zone: ZONA_HORARIA })
+        .endOf("day")
+        .toJSDate();
 
     return Detalle.aggregate([
         {
@@ -184,8 +218,8 @@ function getIngresosDB(idSucursal, fechaInicio, fechaFin) {
                     $eq: idSucursal,
                 },
                 fecha: {
-                    $gte: new Date(fechaInicio),
-                    $lte: new Date(fechaFin),
+                    $gte: inicioUTC,
+                    $lte: finUTC,
                 },
 
                 venta: { $eq: true },

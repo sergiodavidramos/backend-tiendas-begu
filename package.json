@@ -19,6 +19,7 @@
     "g": "^2.0.1",
     "html-pdf-node": "^1.0.8",
     "jsonwebtoken": "^8.5.1",
+    "lunox": "^1.7.1",
     "moment": "^2.29.4",
     "mongodb-snapshot": "^1.4.1",
     "mongoose": "^5.13.21",

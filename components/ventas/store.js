@@ -1,5 +1,5 @@
 const Venta = require("./model");
-
+const { DateTime } = require("lunox")
 function getVentaIdDB(id) {
     return Venta.findById(id)
         .populate({
@@ -28,12 +28,19 @@ function getVentaIdDB(id) {
         });
 }
 function getVentaFechaDB(start, end, idSucursal) {
+    const inicioUTC = DateTime.fromISO(start, { zone: ZONA_HORARIA })
+        .startOf("day")
+        .toJSDate();
+
+    const finUTC = DateTime.fromISO(end, { zone: ZONA_HORARIA })
+        .endOf("day")
+        .toJSDate();
     return Venta.find({
         $and: [
             {
                 fecha: {
-                    $gte: new Date(start),
-                    $lt: new Date(end),
+                    $gte: inicioUTC,
+                    $lt: finUTC,
                 },
             },
             {
