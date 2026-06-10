@@ -115,6 +115,7 @@ async function addVenta(body, user, userToken) {
             (parseFloat(body.efectivo) - total).toFixed(2)
         );
         const efectivoCambiado = parseFloat(body.efectivo);
+        console.log(body, user.idSucursal);
         return new Promise(async (resolve, reject) => {
             const venta = {
                 user: user._id,
