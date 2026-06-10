@@ -119,7 +119,7 @@ async function addVenta(body, user, userToken) {
         return new Promise(async (resolve, reject) => {
             const venta = {
                 user: user._id,
-                idSucursal: user.idSucursal,
+                idSucursal: body.sucursal._id,
                 client: body.client.id,
                 detalleVenta: detalle.body._id,
                 fecha: new Date(),
@@ -149,7 +149,7 @@ async function addVenta(body, user, userToken) {
                                     body: JSON.stringify({
                                         idProducto: dat.producto._id,
                                         datos: { stockTotal: dat.cantidad },
-                                        idSucursal: user.idSucursal,
+                                        idSucursal: body.sucursal._id,
                                         venta: true,
                                     }),
                                     headers: {
