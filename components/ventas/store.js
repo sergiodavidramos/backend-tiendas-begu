@@ -33,8 +33,10 @@ function getVentaFechaDB(start, end, idSucursal) {
         $and: [
             {
                 fecha: {
-                    $gte: new Date(`${start}T00:00:00`),
-                    $lt: new Date(`${end}T23:59:59.999`),
+                    $gte: new Date(start),
+                    $lt: new Date(end),
+                    // $gte: new Date(`${start}T00:00:00`),
+                    // $lt: new Date(`${end}T23:59:59.999`),
                 },
             },
             {

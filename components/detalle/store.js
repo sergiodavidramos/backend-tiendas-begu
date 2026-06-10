@@ -86,8 +86,10 @@ function getVentasDiaDB(idSucursal, fechaHoyInicio, fechaHoyFin) {
                     $eq: idSucursal,
                 },
                 fecha: {
-                    $gte: new Date(`${fechaHoyInicio}T00:00:00`),
-                    $lte: new Date(`${fechaHoyFin}T23:59:59.999`),
+                    $gte: new Date(fechaHoyInicio),
+                    $lte: new Date(fechaHoyFin),
+                    // $gte: new Date(`${fechaHoyInicio}T00:00:00`),
+                    // $lte: new Date(`${fechaHoyFin}T23:59:59.999`),
                 },
                 venta: { $eq: true },
             },
